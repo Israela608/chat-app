@@ -1,45 +1,28 @@
-import 'dart:developer';
-
-import 'package:blanq_invoice/data/models/response.dart';
-import 'package:blanq_invoice/data/models/signup.dart';
-import 'package:blanq_invoice/viewmodels/auth_viewmodel.dart';
+import 'package:chat_app/features/auth/viewmodels/auth_viewmodel.dart';
 import 'package:flutter/material.dart';
 
-class SignUpViewModel extends ChangeNotifier {
-  SignUpViewModel({required this.authViewModel});
+class RegistrationViewModel extends ChangeNotifier {
+  RegistrationViewModel({required this.authViewModel});
 
-  AuthViewModel authViewModel;
+  AuthViewmodel authViewModel;
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
-
-  late String fullName, email, password = '', confirmPassword;
+  late String email, password = '', confirmPassword;
   late bool _isCompleted;
 
   //IS_VALIDATED
-  late bool isFullNameValidated,
-      isEmailValidated,
-      isPasswordValidated,
-      isConfirmPasswordValidated;
+  late bool isEmailValidated, isPasswordValidated, isConfirmPasswordValidated;
 
   initialize() {
-    _isLoading = false;
-
-    isFullNameValidated = false;
+    _isCompleted = false;
     isEmailValidated = false;
     isPasswordValidated = false;
     isConfirmPasswordValidated = false;
-
-    _isCompleted = false;
   }
 
   bool get isCompleted => _isCompleted;
 
   void updateButton() {
-    if (isFullNameValidated &&
-        isEmailValidated &&
-        isPasswordValidated &&
-        isConfirmPasswordValidated) {
+    if (isEmailValidated && isPasswordValidated && isConfirmPasswordValidated) {
       _isCompleted = true;
     } else {
       _isCompleted = false;
@@ -49,23 +32,5 @@ class SignUpViewModel extends ChangeNotifier {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
-  }
-
-  Future<ResponseModel> signUp() async {
-    _isLoading = true;
-    notifyListeners();
-    log('Signing Up');
-
-    SignUpModel signUpBody = SignUpModel(
-      fullName: fullName.trim(),
-      email: email.toLowerCase().trim(),
-      password: password.trim(),
-    );
-
-    ResponseModel response = await authViewModel.signUp(signUpBody);
-
-    _isLoading = false;
-    notifyListeners();
-    return response;
   }
 }

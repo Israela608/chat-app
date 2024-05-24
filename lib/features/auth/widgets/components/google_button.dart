@@ -32,7 +32,7 @@ class GoogleButton extends StatelessWidget {
 
                 Navigation.gotoWidget(
                   context,
-                  ChatScreen(),
+                  const ChatScreen(),
                 );
               }
 

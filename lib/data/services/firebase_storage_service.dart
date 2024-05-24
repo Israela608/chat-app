@@ -1,7 +1,6 @@
-import 'package:cocodemy/firebase_ref/references.dart';
-import 'package:get/get.dart';
+import 'package:chat_app/firebase_ref/references.dart';
 
-class FirebaseStorageService extends GetxService {
+class FirebaseStorageService {
   //Function that loads images from Firebase Storage
   Future<String?> getImage(String? imgName) async {
     if (imgName == null) {
