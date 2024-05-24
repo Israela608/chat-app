@@ -15,6 +15,7 @@ I was supposed to completer these sections, but was unable because due to other 
 - I've not tested the notification part yet
 - Display date at the start of each day of the Chats
 - Firebase Analysis
+- App Icon
 - Some Code Clean ups
 
 ## How would you track down a performance issue in production? Have you ever had to do this?
